@@ -1,4 +1,8 @@
 import tkinter.ttk as ttk
+import tkinter as tk
+
+from scenes.login import LoginScene
+from scenes.model import loger
 from .model import master_key
 from .home import HomeScene
 
@@ -17,15 +21,17 @@ class SignupScene:
 		self.btn_signup.grid(row=1, column=1)
 
 	def hide(self):
-		self.label.destroy()
-		self.entry.destroy()
-		self.btn_signup.destroy()
+		self.label.grid_forget()
+		self.entry.grid_forget()
+		self.btn_signup.grid_forget()
 
 	def signup(self, event=None):
 		new_key = self.entry.get()
+		self.entry.delete(0, tk.END)
 
 		if len(new_key) > 0:
+			loger.login()
 			master_key.save(new_key)
 			self.hide()
-			HomeScene(self.app).show()
+			HomeScene(self.app, LoginScene(self.app).show).show()
 

@@ -1,9 +1,11 @@
 import tkinter as tk
 import tkinter.ttk as ttk
+from scenes.home import HomeScene
 import scenes.style
 from scenes.signup import SignupScene
 from scenes.login import LoginScene
 from scenes.model import master_key
+from scenes.model import loger
 from scenes.style import Color
 
 if __name__ == '__main__':
@@ -21,7 +23,10 @@ if __name__ == '__main__':
 	scenes.style.init()
 
 	if master_key.is_init():
-		LoginScene(app).show()
+		if loger.is_logged():
+			HomeScene(app, LoginScene(app).show).show()
+		else:
+			LoginScene(app).show()
 	else:
 		SignupScene(app).show()
 

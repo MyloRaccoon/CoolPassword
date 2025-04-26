@@ -1,5 +1,7 @@
 import tkinter as tk
 import tkinter.ttk as ttk
+
+from scenes.model import loger
 from .model import master_key
 from .home import HomeScene
 
@@ -20,14 +22,18 @@ class LoginScene:
 		self.lbl_error.grid(row=2)
 
 	def hide(self):
-		self.lbl_title.destroy()
-		self.entry.destroy()
-		self.btn_log.destroy()
-		self.lbl_error.destroy()
+		self.lbl_title.grid_forget()
+		self.entry.grid_forget()
+		self.btn_log.grid_forget()
+		self.lbl_error.grid_forget()
 	
 	def login(self, event=None):
-		if master_key.check(self.entry.get()):
+		pwd = self.entry.get()
+		self.entry.delete(0,tk.END)
+
+		if master_key.check(pwd):
+			loger.login()
 			self.hide()
-			HomeScene(self.app).show()
+			HomeScene(self.app, self.show).show()
 		else:
 			self.lbl_error.config(text="Master key incorrect")

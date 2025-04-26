@@ -1,15 +1,19 @@
 from hashlib import new
 import tkinter as tk
 import tkinter.ttk as ttk
+from typing import Callable
 
 from scenes import style
+from scenes.model import loger
 from scenes.site_list import SiteList
 from .model import passwords
 
 class HomeScene:
 
-	def __init__(self, app):
+	def __init__(self, app, loopback):
 		passwords.load()
+
+		self.btn_logout = ttk.Button(app, command= lambda: self.logout(loopback))
 
 		self.search_canvas = tk.Canvas(app, bg=style.Color.DARKEST, borderwidth=0, relief='flat', highlightthickness=0)
 		
@@ -54,6 +58,7 @@ class HomeScene:
 		self.add_entry.delete(0,tk.END)
 
 	def show(self):
+		self.btn_logout.pack(side=tk.RIGHT, anchor='ne')
 
 		self.search_canvas.pack(pady=10)
 
@@ -63,6 +68,8 @@ class HomeScene:
 		self.add_canvas.pack(pady=10)
 
 	def hide(self):
+		self.btn_logout.pack_forget()
+
 		self.search_canvas.pack_forget()
 
 		self.site_list.hide()
@@ -74,3 +81,8 @@ class HomeScene:
 	def reload(self):
 		self.hide()
 		self.show()
+
+	def logout(self, loopback: Callable):
+		loger.logout()
+		self.hide()
+		loopback()
