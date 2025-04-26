@@ -13,7 +13,7 @@ class HomeScene:
 	def __init__(self, app, loopback):
 		passwords.load()
 
-		self.btn_logout = ttk.Button(app, command= lambda: self.logout(loopback))
+		self.btn_logout = ttk.Button(app, text="⇱", command= lambda: self.logout(loopback))
 
 		self.search_canvas = tk.Canvas(app, bg=style.Color.DARKEST, borderwidth=0, relief='flat', highlightthickness=0)
 		
