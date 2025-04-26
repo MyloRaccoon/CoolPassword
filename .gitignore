@@ -1,2 +1,4 @@
 .master_key
 .sites
+.seed
+scenes/model/secret.py

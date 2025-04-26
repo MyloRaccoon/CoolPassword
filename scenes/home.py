@@ -1,38 +1,69 @@
 import tkinter as tk
+import tkinter.ttk as ttk
+
+from scenes import style
+from scenes.site_list import SiteList
 from .model import passwords
 
 class HomeScene:
 
 	def __init__(self, app):
-		self.app = app
-		self.lbl_title = tk.Label(app, text='Welcome')
-		self.sites_lbl = []
-		self.entry_site = tk.Entry(app)
-		self.btn_add_site = tk.Button(app, text='Add site', command = lambda: self.add_site())
+		passwords.load()
 
-	def add_site(self):
-		new_site = self.entry_site.get()
+		self.search_canvas = tk.Canvas(app, bg=style.Color.DARKEST, borderwidth=0, relief='flat', highlightthickness=0)
+		
+		self.search_lbl = ttk.Label(self.search_canvas, text="Search a site")
+		self.search_entry = ttk.Entry(self.search_canvas)
+		self.search_entry.bind("<Key>", self.on_filter)
+
+		self.search_lbl.grid(padx=10)
+		self.search_entry.grid(row=0, column=1)
+
+
+
+		self.sites_canvas = tk.Canvas(app, bg=style.Color.DARKEST, borderwidth=0, relief='flat', highlightthickness=0)
+		self.site_list = SiteList(self.sites_canvas)
+
+
+
+		self.add_canvas = tk.Canvas(app, bg=style.Color.DARKEST, borderwidth=0, relief='flat', highlightthickness=0)
+		
+		self.add_lbl = ttk.Label(self.add_canvas, text='Add a new site')
+		self.add_entry = ttk.Entry(self.add_canvas)
+		self.add_entry.bind("<Return>", self.add_site)
+		self.add_btn = ttk.Button(self.add_canvas, text='✚', command = lambda: self.add_site())
+		
+		self.add_lbl.grid(padx=5)
+		self.add_entry.grid(row=0, column=1, padx=5)
+		self.add_btn.grid(row=0, column=2)
+
+	def on_filter(self, event=None):
+		self.site_list.reload(self.search_entry.get())
+
+	def add_site(self, event=None):
+		new_site = self.add_entry.get()
 		if len(new_site) > 0:
 			passwords.new(new_site)
-			self.entry_site.delete(0,tk.END)
 			self.reload()
 
 	def show(self):
-		self.lbl_title.grid()
-		passwords.load()
-		for site in passwords.get_sites():
-			lbl = tk.Label(self.app, text=site)
-			self.sites_lbl.append(lbl)
-			lbl.grid()
-		self.entry_site.grid()
-		self.btn_add_site.grid()
+		self.add_entry.delete(0,tk.END)
+
+		self.search_canvas.pack(pady=10)
+
+		self.site_list.show()
+		self.sites_canvas.pack()
+
+		self.add_canvas.pack(pady=10)
 
 	def hide(self):
-		self.lbl_title.grid_forget()
-		while len(self.sites_lbl) != 0:
-			self.sites_lbl.pop().grid_forget()
-		self.entry_site.grid_forget()
-		self.btn_add_site.grid_forget()
+		self.search_canvas.pack_forget()
+
+		self.site_list.hide()
+		self.sites_canvas.pack_forget()
+
+		self.add_canvas.pack_forget()
+
 
 	def reload(self):
 		self.hide()
