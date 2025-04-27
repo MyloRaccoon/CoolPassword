@@ -28,6 +28,7 @@ class LoginScene:
 		self.lbl_error.grid_forget()
 	
 	def login(self, event=None):
+		self.lbl_error.config(text="")
 		pwd = self.entry.get()
 		self.entry.delete(0,tk.END)
 

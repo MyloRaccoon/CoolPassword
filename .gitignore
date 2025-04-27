@@ -2,4 +2,5 @@
 .sites
 .seed
 .logged
+save.cool
 scenes/model/secret.py

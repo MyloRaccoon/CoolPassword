@@ -12,7 +12,7 @@ if __name__ == '__main__':
 	root = tk.Tk()
 	root.title('Cool Password')
 	root.configure(bg=Color.DARKEST)
-	root.grid_anchor("n")
+	root.grid_anchor("center")
 	root.geometry('500x800')
 	root.resizable(False, False)
 

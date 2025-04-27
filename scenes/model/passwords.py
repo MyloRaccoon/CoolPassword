@@ -50,3 +50,9 @@ def copy(site):
 def remove(site):
 	PASSWORDS.pop(site)
 	save()
+
+def set(sites: list[str]):
+	PASSWORDS.clear()
+	for site in sites:
+		PASSWORDS[site] = generate(get_master_key(), site, get_seed())
+	save()

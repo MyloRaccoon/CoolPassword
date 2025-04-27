@@ -11,3 +11,7 @@ def get():
 	with open('.seed', 'r') as f:
 		seed = f.read()
 	return seed
+
+def set(seed: str):
+	with open('.seed', 'w') as f:
+		f.write(seed)
