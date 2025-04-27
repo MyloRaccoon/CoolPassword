@@ -1,17 +1,19 @@
 from pathlib import Path
 
+from scenes.model.files import LOGER_FILE
+
 def login():
-	with open('.logged', 'w') as f:
+	with open(LOGER_FILE, 'w') as f:
 		f.write("true")
-		LOGGED = True
 
 def logout():
-	with open('.logged', 'w') as f:
+	with open(LOGER_FILE, 'w') as f:
 		f.write("false")
-		LOGGED = False
 
 def is_logged():
-	with open('.logged', 'r') as f:
+	if not LOGER_FILE.exists():
+		return False
+	with open(LOGER_FILE, 'r') as f:
 		match f.read():
 			case "true":
 				return True

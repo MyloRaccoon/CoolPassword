@@ -12,11 +12,11 @@ def init():
 
 	style = ttk.Style()
 
+
 	style.configure("TButton",
 		background = Color.DARKER,
 		foreground = Color.LIGHT,
-		borderwidth = 0,
-		width=3
+		borderwidth = 0
 	)
 
 	style.map("TButton",
@@ -28,6 +28,10 @@ def init():
 			('pressed', 'sunken'), 
 			('!pressed', 'raised')
 		]
+	)
+
+	style.configure("Main.TButton",
+		width=3
 	)
 
 	style.configure("TLabel",
@@ -50,9 +54,28 @@ def init():
 
 	style.configure("TScrollbar",
 		background=Color.DARKER,
-		troughcolor=Color.DARK,
+		troughcolor=Color.DARKEST,
 		arrowcolor=Color.DARK,
 		borderwidth=0,
 		relief="flat",
 		gripcount=0
+	)
+
+	style.map("TScrollbar",
+	    background=[
+	        ("active", Color.DARK),
+	        ("!active", Color.DARKER)
+	    ]
+	)
+
+	# this apparently is for the combobox in the filedialog
+	# am not sure and, because i use gtk apparently, i can't test this lol
+	# so mine is ugly sadly :,(
+	style.configure("TCombobox",
+	    fieldbackground=Color.DARK,
+	    background=Color.DARKEST,
+	    foreground=Color.LIGHT,
+	    arrowcolor=Color.LIGHT,
+	    borderwidth=0,
+	    relief="flat"
 	)

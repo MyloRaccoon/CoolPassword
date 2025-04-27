@@ -1,12 +1,13 @@
+import os
 import pyperclip
 
 from scenes.model import secret
+from scenes.model.files import SITES_FILE
 from .master_key import get as get_master_key
 from .seed import get as get_seed
 from pathlib import Path
 
 SEPARATOR = '|'
-SITES_FILE = '.sites'
 PASSWORDS = {}
 
 def generate(master_key: str, site: str, seed: str) -> str:
@@ -14,7 +15,7 @@ def generate(master_key: str, site: str, seed: str) -> str:
 	return secret.generate(master_key, site, seed)
 
 def get_sites():
-	if not Path(SITES_FILE).exists():
+	if not SITES_FILE.exists():
 		return []
 
 	with open(SITES_FILE, 'r') as f:
@@ -56,3 +57,8 @@ def set(sites: list[str]):
 	for site in sites:
 		PASSWORDS[site] = generate(get_master_key(), site, get_seed())
 	save()
+
+def clear():
+	if SITES_FILE.exists():
+		os.remove(SITES_FILE)
+	load()

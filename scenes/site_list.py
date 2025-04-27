@@ -8,7 +8,7 @@ class SiteList:
 
 	def __init__(self, parent):
 		self.parent = parent
-		self.canvas = tk.Canvas(parent, bg=Color.DARKEST, borderwidth=0, relief='flat', highlightthickness=0, height=685)
+		self.canvas = tk.Canvas(parent, bg=Color.DARKEST, borderwidth=0, relief='flat', highlightthickness=0, height=600)
 		self.scrollbar = ttk.Scrollbar(parent, orient=tk.VERTICAL, command=self.canvas.yview)
 		self.canvas.config(yscrollcommand=self.scrollbar.set)
 		self.canvas_children = []
@@ -20,7 +20,7 @@ class SiteList:
 		self.canvas.bind_all("<Button-4>", self.on_mousewheel) # Linux up
 		self.canvas.bind_all("<Button-5>", self.on_mousewheel) # Linux down
 
-		self.n_sites_limit = 18
+		self.n_sites_limit = 16
 
 	def on_mousewheel(self, event):
 		if len(passwords.get_sites()) > self.n_sites_limit:
@@ -44,13 +44,15 @@ class SiteList:
 			ttk.Button(
 				self.frame, 
 				text='⎙', 
-				command = lambda site=site: passwords.copy(site)
+				command = lambda site=site: passwords.copy(site),
+				style="Main.TButton"
 			).grid(row=row, column=1, padx=10, pady=5)
 
 			ttk.Button(
 				self.frame, 
 				text='⌫', 
-				command = lambda site=site: [passwords.remove(site), self.reload()]
+				command = lambda site=site: [passwords.remove(site), self.reload()],
+				style="Main.TButton"
 			).grid(row=row, column=2, padx=10, pady=5)
 
 			row += 1

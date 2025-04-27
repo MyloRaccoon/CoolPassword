@@ -1,6 +1,7 @@
+import os
 import tkinter as tk
-import tkinter.ttk as ttk
 from scenes.home import HomeScene
+from scenes.model.files import init_dir
 import scenes.style
 from scenes.signup import SignupScene
 from scenes.login import LoginScene
@@ -9,6 +10,8 @@ from scenes.model import loger
 from scenes.style import Color
 
 if __name__ == '__main__':
+	init_dir()
+
 	root = tk.Tk()
 	root.title('Cool Password')
 	root.configure(bg=Color.DARKEST)

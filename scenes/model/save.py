@@ -1,12 +1,15 @@
 import json
-from cryptography.fernet import Fernet
+import os
+from pathlib import Path
 
+from scenes.model.files import KEY_FILE, SAVE_FILE
+from scenes.model.loger import logout
 import scenes.model.master_key as master_key_controller
 import scenes.model.seed as seed_controller
 import scenes.model.passwords as passwords
 from scenes.model.secret import decrypt, encrypt
 
-def save(save_path, key_path):
+def save():
 	master_key = master_key_controller.get()
 	seed = seed_controller.get()
 	sites = passwords.get_sites()
@@ -22,10 +25,10 @@ def save(save_path, key_path):
 
 
 
-	with open(save_path, 'wb') as f:
+	with open(SAVE_FILE, 'wb') as f:
 		f.write(encrypted)
 
-	with open(key_path, 'wb') as f:
+	with open(KEY_FILE, 'wb') as f:
 		f.write(key)
 
 
@@ -47,3 +50,10 @@ def load(master_key: str, save_path: str, key_path: str) -> bool:
 	passwords.set(data['sites'])
 
 	return True
+
+
+def nuke():
+	passwords.clear()
+	master_key_controller.clear()
+	seed_controller.clear()
+	logout()
