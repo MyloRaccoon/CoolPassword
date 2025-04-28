@@ -7,10 +7,10 @@ from scenes.model.loger import logout
 import scenes.model.master_key as master_key_controller
 import scenes.model.seed as seed_controller
 import scenes.model.passwords as passwords
-from scenes.model.secret import decrypt, encrypt
+from scenes.model.secret import decrypt, encrypt, hash_password
 
 def save():
-	master_key = master_key_controller.get()
+	master_key = master_key_controller.get_hash()
 	seed = seed_controller.get()
 	sites = passwords.get_sites()
 
@@ -42,10 +42,10 @@ def load(master_key: str, save_path: str, key_path: str) -> bool:
 	json_data = decrypt(key, crypted)
 	data = json.loads(json_data)
 
-	if master_key != data['master_key']:
+	if hash_password(master_key) != data['master_key']:
 		return False
 
-	master_key_controller.save(data['master_key'])
+	master_key_controller.save(master_key)
 	seed_controller.set(data['seed'])
 	passwords.set(data['sites'])
 
