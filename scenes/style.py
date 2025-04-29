@@ -11,7 +11,7 @@ class Color:
 def init():
 
 	style = ttk.Style()
-
+	style.theme_use("default")
 
 	style.configure("TButton",
 		background = Color.DARKER,
