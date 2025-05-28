@@ -2,9 +2,6 @@
 
 Un gestionnaire de mot de passe complètement en python.
 
-Pour pas leak la manière dont je génère j'ai pas push le fichier secret.py du coup.
-(pas la peine d'aller regarder dans l'historique j'ai changé depuis biensur)
-
 ### Screenshots
 
 ![image](https://github.com/user-attachments/assets/65ce9388-79fb-4486-b44a-10af730db688)
