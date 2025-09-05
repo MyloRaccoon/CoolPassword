@@ -10,6 +10,8 @@ from scenes.model import loger
 from scenes.style import Color
 
 if __name__ == '__main__':
+	print("hello world")
+
 	init_dir()
 
 	root = tk.Tk()
