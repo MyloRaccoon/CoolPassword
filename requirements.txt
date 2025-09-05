@@ -1,7 +1,6 @@
 pytest
 pyperclip
 cryptography
-tkinter
 os
 enum
 hashlib
