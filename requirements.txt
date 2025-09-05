@@ -1,0 +1,11 @@
+pytest
+pyperclip
+cryptography
+tkinter
+os
+enum
+hashlib
+typing
+pathlib
+json
+random
