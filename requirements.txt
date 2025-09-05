@@ -1,7 +1,6 @@
 pytest
 pyperclip
 cryptography
-os
 enum
 hashlib
 typing
