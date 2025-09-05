@@ -1,9 +1,5 @@
 pytest
 pyperclip
 cryptography
-enum
 hashlib
-typing
 pathlib
-json
-random
