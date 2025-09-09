@@ -23,7 +23,7 @@ jobs:
     - name: Set up virtual environment
       run: |
         python3 -m venv .venv
-        echo "$GITHUB_WORKSPACE/.venv/bin" >> $GITHUB_PATH
+        source .venv/bin/activate
         pip install --upgrade pip
         pip install -r requirements.txt
         pip install ruff
@@ -34,4 +34,5 @@ jobs:
 
     - name: Linter with ruff
       run: |
+        source .venv/bin/activate
         ruff check
