@@ -1,6 +1,4 @@
 import json
-import os
-from pathlib import Path
 
 from scenes.model.files import KEY_FILE, SAVE_FILE
 from scenes.model.loger import logout

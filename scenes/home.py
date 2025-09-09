@@ -1,4 +1,3 @@
-from hashlib import new
 import tkinter as tk
 import tkinter.ttk as ttk
 from typing import Callable
@@ -103,7 +102,7 @@ class HomeScene:
 	def add_site(self, event=None):
 		self.add_error.config(text="")
 		new_site = self.add_entry.get()
-		if len(new_site) > 0 and len(new_site) < self.site_max_lenght and not passwords.SEPARATOR in new_site:
+		if len(new_site) > 0 and len(new_site) < self.site_max_lenght and passwords.SEPARATOR not in new_site:
 			passwords.new(new_site)
 			self.reload()
 		elif passwords.SEPARATOR in new_site:

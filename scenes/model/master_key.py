@@ -1,5 +1,3 @@
-from cryptography.fernet import Fernet
-from pathlib import Path
 import os
 
 from scenes.model.files import MASTER_KEY_FILE
@@ -13,7 +11,7 @@ def is_init():
 def save(master_key: str):
 	MASTER_KEY = master_key
 	with open(MASTER_KEY_FILE, "w") as f:
-		f.write(hash_password(master_key))
+		f.write(hash_password(MASTER_KEY))
 
 def get_hash():
 	with open(MASTER_KEY_FILE, "r") as f:

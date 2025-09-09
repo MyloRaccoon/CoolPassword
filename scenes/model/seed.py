@@ -1,6 +1,5 @@
 import os
 from random import randint
-from pathlib import Path
 
 from scenes.model.files import SEED_FILE
 

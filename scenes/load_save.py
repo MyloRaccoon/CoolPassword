@@ -106,7 +106,7 @@ Both files are created when hitting the save "🖫" button in the home page
 
 		file = fd.askopenfile(filetypes = filetypes)
 
-		if file != None:
+		if file is not None:
 			self.save_file_path.config(text=file.name)
 
 	def import_key_file(self):
@@ -117,7 +117,7 @@ Both files are created when hitting the save "🖫" button in the home page
 
 		file = fd.askopenfile(filetypes = filetypes)
 
-		if file != None:
+		if file is not None:
 			self.key_file_path.config(text=file.name)
 
 	def load(self, event=None):

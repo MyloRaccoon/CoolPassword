@@ -1,4 +1,4 @@
-import hashlib, string
+import hashlib
 from cryptography.fernet import Fernet
 
 def generate(master_key: str, site: str, seed: str) -> str:

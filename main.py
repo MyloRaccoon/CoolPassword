@@ -1,4 +1,3 @@
-import os
 import tkinter as tk
 from scenes.home import HomeScene
 from scenes.model.files import init_dir

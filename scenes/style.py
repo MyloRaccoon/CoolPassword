@@ -1,4 +1,3 @@
-from enum import Enum
 import tkinter.ttk as ttk
 
 class Color:

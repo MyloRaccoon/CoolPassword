@@ -1,5 +1,3 @@
-from pathlib import Path
-
 from scenes.model.files import LOGER_FILE
 
 def login():

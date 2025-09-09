@@ -36,7 +36,7 @@ class SiteList:
 		row = 0
 		for site in passwords.get_sites():
 
-			if (not filter in site) and filter != "":
+			if (filter not in site) and filter != "":
 				continue
 
 			ttk.Label(self.frame, text=site).grid(row=row, column=0, padx=10, pady=5)
