@@ -13,5 +13,5 @@ SITES_FILE: Path = MAIN_DIR / 'sites'
 SEED_FILE: Path = MAIN_DIR / 'seed'
 
 def init_dir():
-	if not MAIN_DIR.exists():
-		os.mkdir(MAIN_DIR)
+    if not MAIN_DIR.exists():
+        os.mkdir(MAIN_DIR)
