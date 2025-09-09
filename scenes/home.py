@@ -12,6 +12,7 @@ from scenes.model.save import nuke
 from scenes.site_list import SiteList
 from .model import passwords
 
+
 class HomeScene:
 
     def __init__(self, app, loopback):
@@ -19,10 +20,18 @@ class HomeScene:
 
         self.app = app
 
-        self.btn_logout = ttk.Button(app, text="⇱", command= lambda: self.logout(loopback), style="Main.TButton")
+        self.btn_logout = ttk.Button(
+            app, text="⇱", command=lambda: self.logout(loopback), style="Main.TButton"
+        )
 
-        self.search_canvas = tk.Canvas(app, bg=style.Color.DARKEST, borderwidth=0, relief='flat', highlightthickness=0)
-        
+        self.search_canvas = tk.Canvas(
+            app,
+            bg=style.Color.DARKEST,
+            borderwidth=0,
+            relief="flat",
+            highlightthickness=0,
+        )
+
         self.search_lbl = ttk.Label(self.search_canvas, text="Search a site")
         self.search_entry = ttk.Entry(self.search_canvas)
         self.search_entry.bind("<Key>", self.on_filter)
@@ -30,43 +39,72 @@ class HomeScene:
         self.search_lbl.grid(padx=10)
         self.search_entry.grid(row=0, column=1)
 
-
-
-        self.sites_canvas = tk.Canvas(app, bg=style.Color.DARKEST, borderwidth=0, relief='flat', highlightthickness=0)
+        self.sites_canvas = tk.Canvas(
+            app,
+            bg=style.Color.DARKEST,
+            borderwidth=0,
+            relief="flat",
+            highlightthickness=0,
+        )
         self.site_list = SiteList(self.sites_canvas)
 
-
         self.site_max_lenght = 20
-        self.add_canvas = tk.Canvas(app, bg=style.Color.DARKEST, borderwidth=0, relief='flat', highlightthickness=0)
-        
-        self.add_lbl = ttk.Label(self.add_canvas, text='Add a new site')
+        self.add_canvas = tk.Canvas(
+            app,
+            bg=style.Color.DARKEST,
+            borderwidth=0,
+            relief="flat",
+            highlightthickness=0,
+        )
+
+        self.add_lbl = ttk.Label(self.add_canvas, text="Add a new site")
         self.add_entry = ttk.Entry(self.add_canvas)
         self.add_entry.bind("<Return>", self.add_site)
-        self.add_btn = ttk.Button(self.add_canvas, text='✚', command = lambda: self.add_site(), style="Main.TButton")
+        self.add_btn = ttk.Button(
+            self.add_canvas,
+            text="✚",
+            command=lambda: self.add_site(),
+            style="Main.TButton",
+        )
         self.add_error = ttk.Label(self.add_canvas, text="")
-        
+
         self.add_lbl.grid(padx=5)
         self.add_entry.grid(row=0, column=1, padx=5)
         self.add_btn.grid(row=0, column=2)
         self.add_error.grid(row=1, pady=5)
 
+        self.save_canvas = tk.Canvas(
+            app,
+            bg=style.Color.DARKEST,
+            borderwidth=0,
+            relief="flat",
+            highlightthickness=0,
+        )
 
-        self.save_canvas = tk.Canvas(app, bg=style.Color.DARKEST, borderwidth=0, relief='flat', highlightthickness=0)
-
-        self.export_btn = ttk.Button(self.save_canvas, text='🖫', command=lambda: self.export_confirm(), style="Main.TButton")
-        self.import_btn = ttk.Button(self.save_canvas, text='🗎', command=lambda: self.go_to_import(), style="Main.TButton")
+        self.export_btn = ttk.Button(
+            self.save_canvas,
+            text="🖫",
+            command=lambda: self.export_confirm(),
+            style="Main.TButton",
+        )
+        self.import_btn = ttk.Button(
+            self.save_canvas,
+            text="🗎",
+            command=lambda: self.go_to_import(),
+            style="Main.TButton",
+        )
 
         self.export_btn.grid()
         self.import_btn.grid(row=0, column=1, padx=3)
 
-
-        self.nuke_btn = ttk.Button(app, text="☢", command= lambda: self.nuke_confirm(), style="Main.TButton")
-
+        self.nuke_btn = ttk.Button(
+            app, text="☢", command=lambda: self.nuke_confirm(), style="Main.TButton"
+        )
 
     def show(self):
-        self.save_canvas.pack(side=tk.LEFT, anchor='nw')
+        self.save_canvas.pack(side=tk.LEFT, anchor="nw")
 
-        self.btn_logout.pack(side=tk.RIGHT, anchor='ne')
+        self.btn_logout.pack(side=tk.RIGHT, anchor="ne")
 
         self.search_canvas.pack(pady=10)
 
@@ -75,7 +113,7 @@ class HomeScene:
 
         self.add_canvas.pack(pady=10)
 
-        self.nuke_btn.pack(side=tk.RIGHT, anchor='se')
+        self.nuke_btn.pack(side=tk.RIGHT, anchor="se")
 
     def hide(self):
         self.btn_logout.pack_forget()
@@ -91,7 +129,6 @@ class HomeScene:
 
         self.nuke_btn.pack_forget()
 
-
     def reload(self):
         self.hide()
         self.show()
@@ -102,15 +139,19 @@ class HomeScene:
     def add_site(self, event=None):
         self.add_error.config(text="")
         new_site = self.add_entry.get()
-        if len(new_site) > 0 and len(new_site) < self.site_max_lenght and passwords.SEPARATOR not in new_site:
+        if (
+            len(new_site) > 0
+            and len(new_site) < self.site_max_lenght
+            and passwords.SEPARATOR not in new_site
+        ):
             passwords.new(new_site)
             self.reload()
         elif passwords.SEPARATOR in new_site:
-            self.add_error.config(text="Site name can't contain \"|\"")
+            self.add_error.config(text='Site name can\'t contain "|"')
         elif len(new_site) >= self.site_max_lenght:
-            self.add_error.config(text='Site name too long, sorry')
-        self.add_entry.delete(0,tk.END)
- 
+            self.add_error.config(text="Site name too long, sorry")
+        self.add_entry.delete(0, tk.END)
+
     def logout(self, loopback: Callable):
         loger.logout()
         self.hide()
@@ -144,10 +185,13 @@ or one where you now the current master key.
         on_cancel = self.show
         AskKeyScene(self.app, on_cancel, on_ok).show()
 
-
     def nuke_confirm(self):
         self.hide()
-        AskKeyScene(self.app, self.show, self.nuke, """
+        AskKeyScene(
+            self.app,
+            self.show,
+            self.nuke,
+            """
         ☢ Nuke Cool Password ☢
 
 You are going to nuke this Cool Password instance.
@@ -157,7 +201,8 @@ You are going to nuke this Cool Password instance.
 You won't be able to get back your passwords
 unless your saved everything with the "🖫" button.
 Continuing will quit the application but do not worry about that
-            """).show()
+            """,
+        ).show()
 
     def nuke(self):
         nuke()

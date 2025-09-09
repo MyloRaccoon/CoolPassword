@@ -1,6 +1,7 @@
 from model.secret import generate, encrypt, decrypt, hash_password
 from cryptography.fernet import Fernet
 
+
 def test_generate_deterministic():
     """Le mot de passe généré doit toujours être identique avec les mêmes paramètres."""
     pw1 = generate("masterkey", "example.com", "42")

@@ -8,14 +8,14 @@ from scenes.model import master_key
 from scenes.model import loger
 from scenes.style import Color
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     init_dir()
 
     root = tk.Tk()
-    root.title('Cool Password')
+    root.title("Cool Password")
     root.configure(bg=Color.DARKEST)
     root.grid_anchor("center")
-    root.geometry('500x800')
+    root.geometry("500x800")
     root.resizable(False, False)
 
     app = tk.Frame(root)
