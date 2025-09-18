@@ -3,3 +3,9 @@
 .seed
 .logged
 save.cool
+__pycache__/
+scenes/__pycache__/
+scenes/model/__pycache__/
+.ruff_cache/
+.pytype/
+.pytest_cache/
